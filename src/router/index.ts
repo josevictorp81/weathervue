@@ -7,7 +7,6 @@ type Route = {
 }
 
 const Home = () => import('../views/Home/index.vue')
-console.log(typeof Home)
 
 const routes: Route[] = [
   {
