@@ -7,12 +7,18 @@ type Route = {
 }
 
 const Home = () => import('../views/Home/index.vue')
+const City = () => import('../views/City/index.vue')
 
 const routes: Route[] = [
   {
     path: '/',
     name: 'home',
     component: Home,
+  },
+  {
+    path: '/weather/:state/:city',
+    name: 'city',
+    component: City,
   },
 ]
 

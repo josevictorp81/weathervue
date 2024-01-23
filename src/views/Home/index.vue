@@ -1,10 +1,8 @@
 <script lang='ts'>
 import { defineComponent, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import services from '../../services/index'
 import { Feature } from '../../types/searchResults'
-
-
-
 
 type State = {
   searchLocalName: string
@@ -17,10 +15,12 @@ type State = {
 type SetupReturn = {
   state: State,
   search: () => void
+  viewCity: (data: Feature) => void
 }
 
 export default defineComponent({
   setup(): SetupReturn {
+    const router = useRouter()
     const state = reactive<State>({
       searchLocalName: '',
       searchLocalResults: [],
@@ -54,9 +54,21 @@ export default defineComponent({
       }, 400)
     }
 
+    function viewCity(data: Feature) {
+      const [cityName, stateName] = data.place_name.split(',')
+      router.push({
+        name: 'city', params: { state: stateName.replace(' ', ''), city: cityName }, query: {
+          lat: data.geometry.coordinates[1],
+          lng: data.geometry.coordinates[0],
+        }
+      })
+
+    }
+
     return {
       state,
       search,
+      viewCity
     }
   }
 })
@@ -74,7 +86,7 @@ export default defineComponent({
           Sem resultados na sua persquisa, tente um nome diferente.
         </p>
         <template v-else>
-          <li v-for="local in state.searchLocalResults" :key="local.id" class="py-2 cursor-pointer">
+          <li @click="viewCity(local)" v-for="local in state.searchLocalResults" :key="local.id" class="py-2 cursor-pointer">
             {{ local.place_name }}
           </li>
         </template>
