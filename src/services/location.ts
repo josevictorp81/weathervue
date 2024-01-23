@@ -17,7 +17,7 @@ const token =
 export default (httpClient: AxiosInstance): ILocationService => ({
   getLocal: async (local: string): Promise<LocalReturn> => {
     const response = await httpClient.get<SearchResult>(
-      `${local}.json?access_token=${token}&types=place`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${local}.json?access_token=${token}&types=place`
     )
 
     let errors: RequestError | null = null

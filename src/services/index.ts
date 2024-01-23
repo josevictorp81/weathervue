@@ -1,9 +1,7 @@
 import axios from 'axios'
 import locationService from './location'
 
-const httpClient = axios.create({
-  baseURL: 'https://api.mapbox.com/geocoding/v5/mapbox.places/',
-})
+const httpClient = axios.create()
 
 httpClient.interceptors.response.use(
   (response) => {
