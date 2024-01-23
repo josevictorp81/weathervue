@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios'
-import { Feature, SearchResult } from '../types/searchResults'
 import { RequestError } from '../types/errors'
+import { Feature, SearchResult } from '../types/searchResults'
 
 type LocalReturn = {
   data: Feature[]
@@ -19,7 +19,6 @@ export default (httpClient: AxiosInstance): ILocationService => ({
     const response = await httpClient.get<SearchResult>(
       `${local}.json?access_token=${token}&types=place`
     )
-    console.log(import.meta.env.BASE_URL)
 
     let errors: RequestError | null = null
     if (!response.data) {
