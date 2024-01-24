@@ -5,7 +5,7 @@ import services from '../../services/index'
 import { Feature } from '../../types/searchResults'
 
 type State = {
-  searchLocalName: string
+  localName: string
   searchLocalResults: Feature[]
   hasError: boolean,
   queryTime: number | undefined
@@ -22,7 +22,7 @@ export default defineComponent({
   setup(): SetupReturn {
     const router = useRouter()
     const state = reactive<State>({
-      searchLocalName: '',
+      localName: '',
       searchLocalResults: [],
       hasError: false,
       queryTime: undefined,
@@ -32,9 +32,9 @@ export default defineComponent({
     function search() {
       clearTimeout(state.queryTime)
       state.queryTime = setTimeout(async () => {
-        if (state.searchLocalName !== '') {
+        if (state.localName !== '') {
           try {
-            const { data, errors } = await services.location.getLocal(state.searchLocalName)
+            const { data, errors } = await services.location.getLocal(state.localName)
             if (errors) {
               state.searchLocalResults = []
               state.noLocalReturned = !state.noLocalReturned
@@ -60,6 +60,7 @@ export default defineComponent({
         name: 'city', params: { state: stateName.replace(' ', ''), city: cityName }, query: {
           lat: data.geometry.coordinates[1],
           lng: data.geometry.coordinates[0],
+          preview: 'true'
         }
       })
 
@@ -77,7 +78,7 @@ export default defineComponent({
 <template>
   <main class="container text-white">
     <div class="py-4 mb-8 relative">
-      <input @input="search" v-model="state.searchLocalName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]">
+      <input @input="search" v-model="state.localName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]">
 
       <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px]">
         <p v-if="state.hasError">
