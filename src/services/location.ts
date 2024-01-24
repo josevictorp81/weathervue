@@ -11,8 +11,7 @@ interface ILocationService {
   getLocal: (local: string) => Promise<LocalReturn>
 }
 
-const token =
-  'pk.eyJ1Ijoiam9zZXZpY3QwcmRldiIsImEiOiJjbHJwYXZsemowM3NvMmpsNDRpNXFyeTNrIn0.8yYnKNxGGz-Q-rtZ-oS7jg'
+const token = import.meta.env.VITE_MAPBOX_KEY
 
 export default (httpClient: AxiosInstance): ILocationService => ({
   getLocal: async (local: string): Promise<LocalReturn> => {
