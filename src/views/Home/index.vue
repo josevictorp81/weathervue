@@ -59,11 +59,10 @@ export default defineComponent({
       router.push({
         name: 'city', params: { state: stateName.replace(' ', ''), city: cityName }, query: {
           lat: data.geometry.coordinates[1],
-          lng: data.geometry.coordinates[0],
+          lon: data.geometry.coordinates[0],
           preview: 'true'
         }
       })
-
     }
 
     return {
