@@ -1,5 +1,6 @@
 import axios from 'axios'
 import locationService from './location'
+import weatherService from './weather'
 
 const httpClient = axios.create()
 
@@ -20,4 +21,5 @@ httpClient.interceptors.response.use(
 
 export default {
   location: locationService(httpClient),
+  weather: weatherService(httpClient),
 }
