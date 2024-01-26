@@ -1,7 +1,7 @@
 <script lang='ts'>
 import { defineComponent, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { verifyCityExists } from '../../helpers/citiesExists'
+import { verifyCityExists } from '../../helpers/cityExist'
 import { makeObjectLOcal } from '../../helpers/makeObjectLocal'
 import { City, ObjectLocal } from '../../types/cities'
 import BaseModal from '../BaseModal/index.vue'
