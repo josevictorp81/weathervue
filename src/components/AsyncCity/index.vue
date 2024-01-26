@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import currentDateAndTime from '../../helpers/currentDateAndTime'
 import services from '../../services'
@@ -25,6 +25,8 @@ export default defineComponent({
 
     const route = useRoute()
 
+    watch(() => route.query, () => state.previewWeather = false)
+
     try {
       const lat = Number(route.query.lat)
       const lon = Number(route.query.lon)
@@ -40,7 +42,7 @@ export default defineComponent({
     } catch (error) {
       console.log('erro')
     }
-    console.log(state)
+
     return {
       state
     }
