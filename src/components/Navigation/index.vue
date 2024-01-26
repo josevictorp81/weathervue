@@ -2,25 +2,12 @@
 import { uid } from 'uid'
 import { defineComponent, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { City, ObjectLocal } from '../../types/cities'
 import BaseModal from '../BaseModal/index.vue'
 
 type State = {
   modalActive: boolean
   showSaveCity: boolean
-}
-
-type ObjectLocal = {
-  id: string
-  state: string
-  city: string
-  coords: {
-    lat: number
-    lon: number
-  }
-}
-
-type City = {
-  cities: ObjectLocal[]
 }
 
 interface SetupReturn {
@@ -50,7 +37,7 @@ export default defineComponent({
 
     function addCityToLocalStorage() {
       if (localStorage.getItem('savedCities')) {
-        const saved = JSON.parse(localStorage.getItem('savedCities') as string)
+        const saved: City = JSON.parse(localStorage.getItem('savedCities') as string)
         savedCities.cities = saved.cities
       }
 
@@ -63,8 +50,13 @@ export default defineComponent({
           lon: Number(route.query.lon)
         }
       }
-      state.showSaveCity = !state.showSaveCity
-      savedCities.cities.push(localObject)
+
+      const exists = savedCities.cities.filter(c => c.city === localObject.city)
+      if (!exists.length) {
+        savedCities.cities.push(localObject)
+        state.showSaveCity = !state.showSaveCity
+      }
+
       localStorage.setItem('savedCities', JSON.stringify(savedCities))
       // removendo o preview de route.query
       let query = Object.assign({}, route.query)
@@ -93,7 +85,7 @@ export default defineComponent({
 
       <div class="flex gap-3 flex-1 justify-end">
         <i @click="toggleModal" class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"></i>
-        <i @click="addCityToLocalStorage" class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"></i>
+        <i @click="addCityToLocalStorage" :class="{ 'cursor-default': state.showSaveCity }" class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"></i>
       </div>
 
       <BaseModal @closeModal="toggleModal" :modalActive="state.modalActive">
