@@ -1,7 +1,8 @@
 <script lang='ts'>
-import { uid } from 'uid'
 import { defineComponent, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { verifyCityExists } from '../../helpers/citiesExists'
+import { makeObjectLOcal } from '../../helpers/makeObjectLocal'
 import { City, ObjectLocal } from '../../types/cities'
 import BaseModal from '../BaseModal/index.vue'
 
@@ -41,19 +42,10 @@ export default defineComponent({
         savedCities.cities = saved.cities
       }
 
-      const localObject: ObjectLocal = {
-        id: uid(),
-        state: route.params.state as string,
-        city: route.params.city as string,
-        coords: {
-          lat: Number(route.query.lat),
-          lon: Number(route.query.lon)
-        }
-      }
-
-      const exists = savedCities.cities.filter(c => c.city === localObject.city)
-      if (!exists.length) {
-        savedCities.cities.push(localObject)
+      const objectLocal: ObjectLocal = makeObjectLOcal(route)
+      const exists = verifyCityExists(savedCities.cities, objectLocal.city)
+      if (!exists) {
+        savedCities.cities.push(objectLocal)
         state.showSaveCity = !state.showSaveCity
       }
 
