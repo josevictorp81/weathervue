@@ -50,7 +50,7 @@ export default defineComponent({
       }
 
       localStorage.setItem('savedCities', JSON.stringify(savedCities))
-      // removendo o preview de route.query
+
       let query = Object.assign({}, route.query)
       delete query.preview
       router.replace({ query })

@@ -8,7 +8,6 @@ import CityCard from '../CityCard/index.vue'
 interface SetupReturn {
   state: City
   showCityView: (city: ObjectLocal) => void
-
 }
 
 export default defineComponent({
@@ -35,7 +34,7 @@ export default defineComponent({
     await getCities()
 
     function showCityView(city: ObjectLocal) {
-      router.push({ name: 'city', params: { state: city.state, city: city.city }, query: { lat: city.coords.lat, lon: city.coords.lon } })
+      router.push({ name: 'city', params: { state: city.state, city: city.city }, query: { id: city.id, lat: city.coords.lat, lon: city.coords.lon } })
     }
 
     return {

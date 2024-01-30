@@ -1,8 +1,9 @@
 <script lang='ts'>
 import { defineComponent, reactive, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import currentDateAndTime from '../../helpers/currentDateAndTime'
 import services from '../../services'
+import { City } from '../../types/cityResult'
 import { ForecastResult } from '../../types/forecastResults'
 
 type State = {
@@ -14,6 +15,7 @@ type State = {
 interface SetupReturn {
   state: State
   getIcon: (icon: string) => string
+  removeCity: () => void
 }
 
 export default defineComponent({
@@ -25,6 +27,7 @@ export default defineComponent({
     })
 
     const route = useRoute()
+    const router = useRouter()
 
     watch(() => route.query, () => state.previewWeather = false)
 
@@ -48,9 +51,18 @@ export default defineComponent({
       return `https://openweathermap.org/img/wn/${icon}@2x.png`
     }
 
+    function removeCity() {
+      const query = String(route.query.id)
+      const cities: City = JSON.parse(localStorage.getItem('savedCities') as string)
+      cities.cities = cities.cities.filter((city) => city.id !== query)
+      localStorage.setItem('savedCities', JSON.stringify(cities))
+      router.push({ name: 'home' })
+    }
+
     return {
       state,
-      getIcon
+      getIcon,
+      removeCity
     }
   }
 })
@@ -133,6 +145,11 @@ export default defineComponent({
           </div>
         </div>
       </div>
+    </div>
+
+    <div @click="removeCity" class="flex items-center gap-2 py-8 text-white cursor-pointer duration-150 hover:text-red-500">
+      <i class="fa-solid fa-trash"></i>
+      <p>Remover Cidade</p>
     </div>
   </div>
 </template>
