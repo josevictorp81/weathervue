@@ -6,18 +6,19 @@ export type Weather = {
 export type Hourly = {
   dt: number
   currentTime?: number
-  weather: Weather
+  weather: Weather[]
 }
 
 type Current = {
   dt: number
   temp: number
   feels_like: number
-  weather: Weather
+  weather: Weather[]
 }
 
 type Daily = {
   dt: number
+  weather: Weather[]
 }
 
 export type ForecastResult = {

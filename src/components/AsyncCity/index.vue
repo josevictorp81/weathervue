@@ -13,6 +13,7 @@ type State = {
 
 interface SetupReturn {
   state: State
+  getIcon: (icon: string) => string
 }
 
 export default defineComponent({
@@ -43,8 +44,13 @@ export default defineComponent({
       console.log('erro')
     }
 
+    function getIcon(icon: string): string {
+      return `https://openweathermap.org/img/wn/${icon}@2x.png`
+    }
+
     return {
-      state
+      state,
+      getIcon
     }
   }
 })
@@ -60,7 +66,7 @@ export default defineComponent({
     </div>
 
     <!--  -->
-    <div class="flex flex-col items-center text-white py-8">
+    <div class="flex flex-col items-center text-white pt-8 pb-4">
       <h1 class="text-4xl mb-2">{{ state.cityName }}</h1>
       <p class="text-sm mb-4">
         {{
@@ -82,7 +88,7 @@ export default defineComponent({
         <p class="capitalize">
           {{ state.data.current.weather[0].description }}
         </p>
-        <img :src="`https://openweathermap.org/img/wn/${state.data.current.weather[0].icon}@2x.png`" alt="Icone do clima">
+        <img :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Icone do clima">
       </div>
     </div>
 
@@ -99,7 +105,7 @@ export default defineComponent({
                 new Date(hour.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' })
               }}
             </p>
-            <img class="h-[60px] w-auto object-cover" :src="`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`" :title="hour.weather[0].description" alt="Icone do clima">
+            <img class="h-[60px] w-auto object-cover" :src="getIcon(hour.weather[0].icon)" :title="hour.weather[0].description" alt="Icone do clima">
             <p class="text-xl mb-4">
               {{ Math.round(hour.temp) }}&deg;
             </p>
@@ -120,7 +126,7 @@ export default defineComponent({
               weekday: 'long'
             }) }}
           </p>
-          <img class="w-[50px] h-[50px] object-cover" :src="`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`" :title="day.weather[0].description" alt="Icone do clima">
+          <img class="w-[50px] h-[50px] object-cover" :src="getIcon(day.weather[0].icon)" :title="day.weather[0].description" alt="Icone do clima">
           <div class="flex gap-2 flex-1 justify-end">
             <p class="p-1">Min: {{ Math.round(day.temp.min) }}&deg;,</p>
             <p class="p-1">Máx: {{ Math.round(day.temp.max) }}&deg;</p>
