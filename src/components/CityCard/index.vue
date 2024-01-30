@@ -34,4 +34,4 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped></style>../../types/cityResult
+<style scoped></style>

@@ -56,4 +56,4 @@ export default defineComponent({
   </p>
 </template>
 
-<style scoped></style>../../types/cityResult
+<style scoped></style>
