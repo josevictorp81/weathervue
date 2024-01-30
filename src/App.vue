@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { RouterView } from 'vue-router'
 import Navigation from './components/Navigation/index.vue'
 
 </script>
@@ -7,8 +7,22 @@ import Navigation from './components/Navigation/index.vue'
 <template>
   <div class="flex flex-col min-h-screen font-roboto bg-weather-primary">
     <Navigation />
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="page" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: 600ms ease all;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+</style>
