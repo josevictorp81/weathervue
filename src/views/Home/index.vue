@@ -10,7 +10,7 @@ type State = {
   localName: string
   searchLocalResults: Feature[]
   hasError: boolean,
-  queryTime: number | undefined
+  queryTime: ReturnType<typeof setTimeout> | number
   noLocalReturned: boolean
 }
 
@@ -28,7 +28,7 @@ export default defineComponent({
       localName: '',
       searchLocalResults: [],
       hasError: false,
-      queryTime: undefined,
+      queryTime: 0,
       noLocalReturned: false
     })
 
