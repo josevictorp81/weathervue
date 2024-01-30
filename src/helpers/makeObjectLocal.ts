@@ -1,6 +1,6 @@
 import { uid } from 'uid'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
-import { ObjectLocal } from '../types/cities'
+import { ObjectLocal } from '../types/cityResult'
 
 export function makeObjectLOcal(
   route: RouteLocationNormalizedLoaded

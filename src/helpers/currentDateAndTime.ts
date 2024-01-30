@@ -1,6 +1,8 @@
-import { WeatherResult } from '../types/weatherResults'
+import { ForecastResult } from '../types/forecastResults'
 
-export default function currentDateAndTime(data: WeatherResult): WeatherResult {
+export default function currentDateAndTime(
+  data: ForecastResult
+): ForecastResult {
   const localOffset: number = new Date().getTimezoneOffset() * 60000
 
   const utc: number = data.current.dt * 1000 + localOffset

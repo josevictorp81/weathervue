@@ -3,7 +3,7 @@ import { defineComponent, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { verifyCityExists } from '../../helpers/cityExist'
 import { makeObjectLOcal } from '../../helpers/makeObjectLocal'
-import { City, ObjectLocal } from '../../types/cities'
+import { City, ObjectLocal } from '../../types/cityResult'
 import BaseModal from '../BaseModal/index.vue'
 
 type State = {
@@ -115,3 +115,4 @@ export default defineComponent({
     </nav>
   </header>
 </template>
+../../types/cityResult

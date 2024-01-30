@@ -1,6 +1,7 @@
 <script lang='ts'>
 import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import CityList from '../../components/CityList/index.vue'
 import services from '../../services/index'
 import { Feature } from '../../types/searchResults'
 
@@ -19,6 +20,7 @@ type SetupReturn = {
 }
 
 export default defineComponent({
+  components: { CityList },
   setup(): SetupReturn {
     const router = useRouter()
     const state = reactive<State>({
@@ -91,7 +93,15 @@ export default defineComponent({
           </li>
         </template>
       </ul>
+    </div>
 
+    <div class="flex flex-col gap-4">
+      <Suspense>
+        <CityList />
+        <template #fallback>
+          <p>Loading...</p>
+        </template>
+      </Suspense>
     </div>
   </main>
 </template>

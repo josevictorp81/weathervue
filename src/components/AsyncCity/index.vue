@@ -3,10 +3,10 @@ import { defineComponent, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import currentDateAndTime from '../../helpers/currentDateAndTime'
 import services from '../../services'
-import { WeatherResult } from '../../types/weatherResults'
+import { ForecastResult } from '../../types/forecastResults'
 
 type State = {
-  data: WeatherResult | any
+  data: ForecastResult | any
   previewWeather: boolean
   cityName: string
 }
@@ -32,7 +32,7 @@ export default defineComponent({
       const lon = Number(route.query.lon)
       state.previewWeather = Boolean(route.query.preview)
       state.cityName = String(route.params.city)
-      const { data, errors } = await services.weather.getWeatherData(lat, lon)
+      const { data, errors } = await services.weather.getForecastData(lat, lon)
 
       if (errors) {
         throw new Error(errors.statusText)
