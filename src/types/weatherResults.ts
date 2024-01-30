@@ -1,29 +1,21 @@
-type Weather = {
-  description: string
-  icon: string
-}
+import { Weather } from './forecastResults'
 
-export type Hourly = {
-  dt: number
-  currentTime?: number
-  weather: Weather
+type Coord = {
+  lon: number
+  lat: number
 }
-
-type Current = {
-  dt: number
+type Main = {
   temp: number
   feels_like: number
-  weather: Weather
-}
-
-type Daily = {
-  dt: number
+  temp_min: number
+  temp_max: number
+  humidity: number
 }
 
 export type WeatherResult = {
-  timezone_offset: number
-  current: Current
-  hourly: Hourly[]
-  daily: Daily
-  currentTime?: number
+  coord: Coord
+  weather: Weather[]
+  main: Main
+  id: number
+  name: string
 }

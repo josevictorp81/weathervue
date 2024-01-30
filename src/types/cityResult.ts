@@ -1,3 +1,5 @@
+import { WeatherResult } from './weatherResults'
+
 export type ObjectLocal = {
   id: string
   state: string
@@ -6,6 +8,7 @@ export type ObjectLocal = {
     lat: number
     lon: number
   }
+  weather?: WeatherResult
 }
 
 export type City = {
