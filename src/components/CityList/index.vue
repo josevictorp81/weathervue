@@ -24,6 +24,7 @@ export default defineComponent({
         const saved: City = JSON.parse(localStorage.getItem('savedCities') as string)
         state.cities = saved.cities
       }
+      await new Promise((res) => setTimeout(res, 1000))
 
       state.cities.forEach(async (city, index) => {
         const { data } = await services.weather.getWeatherData(city.coords.lat, city.coords.lon)

@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import CityList from '../../components/CityList/index.vue'
 import services from '../../services/index'
 import { Feature } from '../../types/searchResults'
+import Loading from './Loading.vue'
 
 type State = {
   localName: string
@@ -20,7 +21,7 @@ type SetupReturn = {
 }
 
 export default defineComponent({
-  components: { CityList },
+  components: { CityList, Loading },
   setup(): SetupReturn {
     const router = useRouter()
     const state = reactive<State>({
@@ -99,7 +100,7 @@ export default defineComponent({
       <Suspense>
         <CityList />
         <template #fallback>
-          <p>Loading...</p>
+          <Loading />
         </template>
       </Suspense>
     </div>
