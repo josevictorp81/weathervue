@@ -42,6 +42,8 @@ export default defineComponent({
         throw new Error(errors.statusText)
       }
 
+      await new Promise((res) => setTimeout(res, 1000))
+
       state.data = currentDateAndTime(data)
     } catch (error) {
       console.log('erro')

@@ -1,9 +1,10 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import AsyncCity from '../../components/AsyncCity/index.vue'
+import Loading from './Loading.vue'
 
 export default defineComponent({
-  components: { AsyncCity }
+  components: { AsyncCity, Loading }
 })
 </script>
 
@@ -12,7 +13,7 @@ export default defineComponent({
     <Suspense>
       <AsyncCity />
       <template #fallback>
-        A inserir....
+        <Loading />
       </template>
     </Suspense>
   </div>
