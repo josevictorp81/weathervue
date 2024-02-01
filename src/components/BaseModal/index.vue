@@ -10,6 +10,7 @@ export default defineComponent({
   props: {
     modalActive: {
       type: Boolean,
+      required: true
     }
   },
   setup(_, { emit }: SetupContext): SetupReturn {

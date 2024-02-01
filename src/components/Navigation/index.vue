@@ -1,83 +1,47 @@
 <script lang='ts'>
 import { defineComponent, reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { verifyCityExists } from '../../helpers/cityExist'
-import { makeObjectLOcal } from '../../helpers/makeObjectLocal'
-import { City, ObjectLocal } from '../../types/cityResult'
 import BaseModal from '../BaseModal/index.vue'
 
 type State = {
   modalActive: boolean
-  showSaveCity: boolean
 }
 
 interface SetupReturn {
   state: State,
   toggleModal: () => void
-  addCityToLocalStorage: () => void
 }
 
 export default defineComponent({
   components: { BaseModal },
   setup(): SetupReturn {
     const state = reactive<State>({
-      modalActive: false,
-      showSaveCity: false
+      modalActive: false
     })
-
-    const savedCities = reactive<City>({
-      cities: []
-    })
-
-    const route = useRoute()
-    const router = useRouter()
 
     function toggleModal() {
       state.modalActive = !state.modalActive
     }
 
-    function addCityToLocalStorage() {
-      if (localStorage.getItem('savedCities')) {
-        const saved: City = JSON.parse(localStorage.getItem('savedCities') as string)
-        savedCities.cities = saved.cities
-      }
-
-      const objectLocal: ObjectLocal = makeObjectLOcal(route)
-      const exists = verifyCityExists(savedCities.cities, objectLocal.city)
-      if (!exists) {
-        savedCities.cities.push(objectLocal)
-        state.showSaveCity = !state.showSaveCity
-      }
-
-      localStorage.setItem('savedCities', JSON.stringify(savedCities))
-
-      let query = Object.assign({}, route.query)
-      delete query.preview
-      router.replace({ query })
-    }
-
     return {
       state,
-      toggleModal,
-      addCityToLocalStorage
+      toggleModal
     }
   }
 })
 </script>
 
 <template>
-  <header class="sticky top-0 bg-weather-primary shadow-lg">
-    <nav class="container flex flex-col sm:flex-row items-center gap-4 text-white py-6">
+  <header class="sticky top-0 shadow-lg rounded-b-xl">
+    <nav class="container flex items-center gap-4 text-white py-3 md:py-4">
       <RouterLink :to="{ name: 'home' }">
-        <div class="flex items-center gap-3">
-          <i class="fa-solid fa-sun text-2xl"></i>
-          <p class="text-2xl">The Local Weather</p>
+        <div class="flex items-center gap-2 flex-col md:flex-row md:gap-4">
+          <img src="../../assets/img/logo.png" class="w-[50px] h-[50px] md:w-[70px] md:h-[70px]" alt="Logo" title="Weather">
+          <p class="text-sm md:text-3xl font-pacifico text-blue-400">Weather</p>
         </div>
       </RouterLink>
 
-      <div class="flex gap-3 flex-1 justify-end">
-        <i @click="toggleModal" class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"></i>
-        <i @click="addCityToLocalStorage" :class="{ 'cursor-default': state.showSaveCity }" class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"></i>
+      <div class="flex flex-1 justify-end">
+        <i @click="toggleModal" class="fa-solid fa-circle-info text-blue-600 text-3xl duration-150 cursor-pointer animate-pulse"></i>
       </div>
 
       <BaseModal @closeModal="toggleModal" :modalActive="state.modalActive">

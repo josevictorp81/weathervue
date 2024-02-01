@@ -10,6 +10,7 @@ export default {
     },
     fontFamily: {
       roboto: ['Roboto, sans-serif'],
+      pacifico: ['Pacifico, sans-serif'],
     },
     container: {
       padding: '2rem',
