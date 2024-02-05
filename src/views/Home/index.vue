@@ -78,31 +78,33 @@ export default defineComponent({
 </script>
 
 <template>
-  <main class="container text-white">
-    <div class="py-4 mb-8 relative">
-      <input @input="search" v-model="state.localName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]">
+  <main class="w-full h-full flex justify-center">
+    <div class="w-11/12 sm:w-4/5 flex flex-col justify-center text-white border-2 border-zinc-500 rounded-xl p-4">
+      <div class="py-4 mb-4 flex justify-center relative">
+        <input @input="search" v-model="state.localName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-2/3 bg-transparent text-zinc-800 border-b border-b-zinc-800 focus:outline-none">
 
-      <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px]">
-        <p v-if="state.hasError">
-          Algo deu errado, tente novamente.</p>
-        <p v-if="!state.hasError && state.noLocalReturned">
-          Sem resultados na sua persquisa, tente um nome diferente.
-        </p>
-        <template v-else>
-          <li @click="viewCity(local)" v-for="local in state.searchLocalResults" :key="local.id" class="py-2 cursor-pointer">
-            {{ local.place_name }}
-          </li>
-        </template>
-      </ul>
-    </div>
+        <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute text-white w-2/3 shadow-md py-2 px-1 top-[66px] rounded bg-blue-400">
+          <p v-if="state.hasError">
+            Algo deu errado, tente novamente.</p>
+          <p v-if="!state.hasError && state.noLocalReturned">
+            Sem resultados na sua persquisa, tente um nome diferente.
+          </p>
+          <template v-else>
+            <li @click="viewCity(local)" v-for="local in state.searchLocalResults" :key="local.id" class="py-2 cursor-pointer">
+              {{ local.place_name }}
+            </li>
+          </template>
+        </ul>
+      </div>
 
-    <div class="flex flex-col gap-4">
-      <Suspense>
-        <CityList />
-        <template #fallback>
-          <Loading />
-        </template>
-      </Suspense>
+      <div class="flex flex-col gap-8 md:flex-row md:flex-wrap md:justify-center">
+        <Suspense>
+          <CityList />
+          <template #fallback>
+            <Loading />
+          </template>
+        </Suspense>
+      </div>
     </div>
   </main>
 </template>

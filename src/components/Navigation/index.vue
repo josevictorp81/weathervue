@@ -31,12 +31,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <header class="sticky top-0 shadow-lg rounded-b-xl">
-    <nav class="container flex items-center gap-4 text-white py-3 md:py-4">
+  <header class="flex justify-center shadow-lg rounded-b-xl">
+    <nav class="w-11/12 sm:w-4/5 md:w-9/12 flex items-center gap-4 text-white p-3">
       <RouterLink :to="{ name: 'home' }">
         <div class="flex items-center gap-2 flex-col md:flex-row md:gap-4">
           <img src="../../assets/img/logo.png" class="w-[50px] h-[50px] md:w-[70px] md:h-[70px]" alt="Logo" title="Weather">
-          <p class="text-sm md:text-3xl font-pacifico text-blue-400">Weather</p>
+          <p class="text-sm md:text-3xl font-pacifico text-blue-500">Weather</p>
         </div>
       </RouterLink>
 

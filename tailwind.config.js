@@ -12,14 +12,6 @@ export default {
       roboto: ['Roboto, sans-serif'],
       pacifico: ['Pacifico, sans-serif'],
     },
-    container: {
-      padding: '2rem',
-      center: true,
-    },
-    screens: {
-      sm: '640px',
-      md: '768px',
-    },
   },
   plugins: [],
 }

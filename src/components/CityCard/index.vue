@@ -10,8 +10,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="flex py-6 px-3 bg-weather-secondary rounded-md shadow-md cursor-pointer">
-    <div class="flex flex-col flex-1">
+  <div class="flex w-full md:w-[290px] lg:w-[360px]  py-6 px-4 bg-blue-600 hover:mt-1 rounded-md shadow-md cursor-pointer">
+    <div class="flex flex-col flex-1 gap-2">
       <h2 class="text-xl">{{ city?.city }}</h2>
       <h3>{{ city?.state }}</h3>
     </div>
@@ -28,7 +28,6 @@ export default defineComponent({
         <span class="text-xs">
           Min: {{ Math.round(city?.weather?.main.temp_min as number ?? 0) }}&deg;
         </span>
-
       </div>
     </div>
   </div>
