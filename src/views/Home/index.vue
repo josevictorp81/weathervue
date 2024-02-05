@@ -79,9 +79,9 @@ export default defineComponent({
 
 <template>
   <main class="w-full h-full flex justify-center">
-    <div class="w-11/12 sm:w-4/5 flex flex-col justify-center text-white border-2 border-zinc-500 rounded-xl p-4">
+    <div class="w-11/12 sm:w-4/5 flex flex-col justify-center text-white rounded-xl p-4">
       <div class="py-4 mb-4 flex justify-center relative">
-        <input @input="search" v-model="state.localName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-2/3 bg-transparent text-zinc-800 border-b border-b-zinc-800 focus:outline-none">
+        <input @input="search" v-model="state.localName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-2/3 bg-transparent text-black border-b border-b-zinc-800 focus:outline-none">
 
         <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute text-white w-2/3 shadow-md py-2 px-1 top-[66px] rounded bg-blue-400">
           <p v-if="state.hasError">
