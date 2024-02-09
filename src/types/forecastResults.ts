@@ -7,6 +7,7 @@ export type Hourly = {
   dt: number
   currentTime?: number
   weather: Weather[]
+  temp: number
 }
 
 type Current = {

@@ -1,5 +1,5 @@
 <script lang='ts'>
-import { defineComponent, reactive, watch } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import currentDateAndTime from '../../helpers/currentDateAndTime'
 import services from '../../services'
@@ -8,7 +8,6 @@ import { ForecastResult } from '../../types/forecastResults'
 
 type State = {
   data: ForecastResult | any
-  previewWeather: boolean
   cityName: string
 }
 
@@ -22,19 +21,19 @@ export default defineComponent({
   async setup(): Promise<SetupReturn> {
     const state = reactive<State>({
       data: {},
-      previewWeather: false,
-      cityName: ''
+      cityName: '',
     })
+
+    // const savedCities = reactive<City>({
+    //   cities: []
+    // })
 
     const route = useRoute()
     const router = useRouter()
 
-    watch(() => route.query, () => state.previewWeather = false)
-
     try {
       const lat = Number(route.query.lat)
       const lon = Number(route.query.lon)
-      state.previewWeather = Boolean(route.query.preview)
       state.cityName = String(route.params.city)
       const { data, errors } = await services.weather.getForecastData(lat, lon)
 
@@ -53,6 +52,26 @@ export default defineComponent({
       return `https://openweathermap.org/img/wn/${icon}@2x.png`
     }
 
+    // function addCityToLocalStorage() {
+    //   if (localStorage.getItem('savedCities')) {
+    //     const saved: City = JSON.parse(localStorage.getItem('savedCities') as string)
+    //     savedCities.cities = saved.cities
+    //   }
+
+    //   const objectLocal: ObjectLocal = makeObjectLOcal(route)
+    //   const exists = verifyCityExists(savedCities.cities, objectLocal.city)
+    //   if (!exists) {
+    //     savedCities.cities.push(objectLocal)
+    //     state.showSaveCity = !state.showSaveCity
+    //   }
+
+    //   localStorage.setItem('savedCities', JSON.stringify(savedCities))
+
+    //   let query = Object.assign({}, route.query)
+    //   delete query.preview
+    //   router.replace({ query })
+    // }
+
     function removeCity() {
       const query = String(route.query.id)
       const cities: City = JSON.parse(localStorage.getItem('savedCities') as string)
@@ -64,94 +83,73 @@ export default defineComponent({
     return {
       state,
       getIcon,
-      removeCity
+      removeCity,
     }
   }
 })
 </script>
 
 <template>
-  <div class="flex flex-col flex-1 items-center">
-    <div v-if="state.previewWeather" class="text-white px-4 py-2 bg-weather-secondary w-full text-center">
-      <p>
-        Você está visualizando esta cidade no momento, clique no botão "+"
-        para começar a rastrear esta cidade.
-      </p>
-    </div>
+  <div class="w-full flex justify-center mt-2">
+    <div class="w-11/12 p-2 flex flex-col gap-4 items-center lg:flex-row lg:gap-6">
+      <div class="w-11/12 bg-zinc-300 rounded-md p-3 flex items-center flex-col shadow-lg sm:w-10/12 md:w-4/5 lg:w-5/12">
+        <p class="text-3xl mb-2">{{ state.cityName }}</p>
+        <p class="mb-2">
+          {{
+            new Date(state.data.currentTime).toLocaleDateString('pt-br', { weekday: 'short', day: '2-digit', month: 'long' })
 
-    <!--  -->
-    <div class="flex flex-col items-center text-white pt-8 pb-4">
-      <h1 class="text-4xl mb-2">{{ state.cityName }}</h1>
-      <p class="text-sm mb-4">
-        {{
-          new Date(state.data.currentTime).toLocaleDateString('pt-br', { weekday: 'short', day: '2-digit', month: 'long' })
-        }}
-        {{
-          new Date(state.data.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' })
-        }}
-      </p>
+          }}
+          {{
+            new Date(state.data.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' })
 
-      <p class="text-8xl mb-4">
-        {{ Math.round(state.data.current.temp) }}&deg;
-      </p>
-
-      <div class="flex flex-col items-center">
-        <p>
-          Sensação Térmica - {{ Math.round(state.data.current.feels_like) }}&deg;
+          }}
         </p>
-        <p class="capitalize">
-          {{ state.data.current.weather[0].description }}
-        </p>
-        <img :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Icone do clima">
+        <p class="text-7xl mb-2">{{ Math.round(state.data.current.temp) }}&deg;</p>
+
+        <div class="w-9/12 flex flex-col items-center pt-2 mb-2">
+          <p class="text-lg text-center lg:w-4/5">Sensação Térmica - {{ Math.round(state.data.current.feels_like) }}&deg;</p>
+          <p class="text-lg capitalize">{{ state.data.current.weather[0].description }}</p>
+          <img :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Ícone">
+        </div>
+
+        <button class="w-2/5 sm:w-56 h-10 rounded-lg bg-blue-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
+          <i class="fa-solid fa-plus"></i>
+          <p class="">Salva Cidade</p>
+        </button>
+        <button class="w-2/5 sm:w-56 h-10 rounded-lg bg-red-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
+          <i class="fa-solid fa-trash"></i>
+          <p class="">Remover Cidade</p>
+        </button>
       </div>
-    </div>
 
-    <hr class="border-white border-opacity-10 border w-full">
+      <div class="w-11/12 flex flex-col items-center gap-4 p-3 bg-zinc-300 rounded-lg shadow-lg sm:w-10/12 md:w-4/5 lg:w-7/12">
+        <div class="w-full flex flex-col gap-2">
+          <h2 class="text-lg text-center">Previsão de hora em hora</h2>
 
-    <!-- tempo de hora em hora -->
-    <div class="max-w-screen-md w-full py-8">
-      <div class="mx-8 text-white">
-        <h2 class="mb-2 text-xl">Previsão de hora em hora</h2>
-        <div class="flex gap-10 overflow-x-hidden hover:overflow-x-scroll">
-          <div v-for="hour in state.data.hourly" :key="hour.dt" class="flex flex-col gap-4 items-center">
-            <p class="text-md whitespace-nowrap">
-              {{
-                new Date(hour.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' })
-              }}
-            </p>
-            <img class="h-[60px] w-auto object-cover" :src="getIcon(hour.weather[0].icon)" :title="hour.weather[0].description" alt="Icone do clima">
-            <p class="text-xl mb-4">
-              {{ Math.round(hour.temp) }}&deg;
-            </p>
+          <div class="flex gap-4 py-2 px-2 overflow-x-auto">
+            <div v-for="hour in state.data.hourly" :id="hour.dt" class="flex flex-col gap-4 bg-zinc-400 rounded-md items-center px-5 py-3">
+              <p class="">{{ new Date(hour.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' }) }}</p>
+              <img :src="getIcon(hour.weather[0].icon)" alt="Ícone" :title="hour.weather[0].description">
+              <p>{{ Math.round(hour.temp) }}&deg;</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full flex flex-col gap-2">
+          <h2 class="text-lg text-center">Previsão para os próximos 7 dias</h2>
+
+          <div class="flex gap-3 py-2 flex-wrap justify-center xl:justify-self-auto">
+            <div v-for="(day, index) in state.data.daily" :key="day.dt" class="flex flex-col items-center rounded-lg bg-zinc-400 py-3 px-2 shadow-lg" :class="{ 'border border-red-500': index === 0 }">
+              <p class="capitalize">{{ new Date(day.dt * 1000).toLocaleDateString('pt-br', { weekday: 'short', day: '2-digit', month: '2-digit' }) }}</p>
+              <img :src="getIcon(day.weather[0].icon)" alt="Ícone" :title="day.weather[0].description">
+              <div class="flex flex-col items-center">
+                <p>Max: {{ Math.round(day.temp.max) }}&deg;</p>
+                <p>Min: {{ Math.round(day.temp.min) }}&deg;</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <hr class="border-white border-opacity-10 border w-full">
-
-    <!-- tempo dia a dia -->
-    <div class="max-w-screen-md w-full py-8">
-      <div class="mx-8 text-white">
-        <h2 class="mb-2 text-xl">Previsão para a semana</h2>
-        <div v-for="day in state.data.daily" :key="day.dt" class="flex items-center">
-          <p class="flex-1 capitalize">
-            {{ new Date(day.dt * 1000).toLocaleDateString('pt-br', {
-              weekday: 'long'
-            }) }}
-          </p>
-          <img class="w-[50px] h-[50px] object-cover" :src="getIcon(day.weather[0].icon)" :title="day.weather[0].description" alt="Icone do clima">
-          <div class="flex gap-2 flex-1 justify-end">
-            <p class="p-1">Min: {{ Math.round(day.temp.min) }}&deg;,</p>
-            <p class="p-1">Máx: {{ Math.round(day.temp.max) }}&deg;</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div @click="removeCity" class="flex items-center gap-2 py-8 text-white cursor-pointer duration-150 hover:text-red-500">
-      <i class="fa-solid fa-trash"></i>
-      <p>Remover Cidade</p>
     </div>
   </div>
 </template>

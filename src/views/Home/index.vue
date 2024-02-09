@@ -97,7 +97,7 @@ export default defineComponent({
         </ul>
       </div>
 
-      <div class="flex flex-col gap-8 md:flex-row md:flex-wrap md:justify-center">
+      <div class="flex flex-col gap-8 md:flex-row md:flex-wrap md:justify-center lg:justify-around">
         <Suspense>
           <CityList />
           <template #fallback>

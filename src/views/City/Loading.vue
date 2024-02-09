@@ -8,25 +8,17 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="flex flex-col flex-1">
-    <div class="flex flex-col items-center pt-8 pb-4">
-      <Loader class="max-w-[300px] w-full mb-2" />
-      <Loader class="max-w-[300px] w-full mb-4" />
-      <Loader class="max-w-[300px] h-[100px] w-full mb-4" />
-      <Loader class="max-w-[300px] h-[60px] w-full mb-2" />
-      <Loader class="max-w-[300px] h-[75px] w-full mb-4" />
-    </div>
-
-    <hr class="border-white border-opacity-10 border w-full">
-
-    <div class="flex flex-col items-center px-8 pt-8 pb-4">
-      <Loader class="max-w-screen-md h-[200px] w-full mb-8" />
-    </div>
-
-    <hr class="border-white border-opacity-10 border w-full">
-
-    <div class="flex flex-col items-center px-8 pt-8 pb-4">
-      <Loader class="max-w-screen-md h-[300px] w-full mb-8" />
+  <div class="w-full flex justify-center mt-2">
+    <div class="w-11/12 flex flex-col gap-4 items-center lg:flex-row lg:gap-6">
+      <div class="w-5/12 mt-14 h-[450px] bg-zinc-300 rounded-md flex flex-col justify-center items-center">
+        <Loader class="w-4/5 h-[90px] mb-4" />
+        <Loader class="w-4/5 h-[200px] mb-4" />
+        <Loader class="w-4/5 h-[80px]" />
+      </div>
+      <div class="w-7/12 h-[700px] bg-zinc-300 flex flex-col items-center rounded-md mt-4">
+        <Loader class="w-11/12 h-[180px] mt-14" />
+        <Loader class="w-11/12 h-[350px] mt-20" />
+      </div>
     </div>
   </div>
 </template>
