@@ -2,7 +2,7 @@ import { uid } from 'uid'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 import { ObjectLocal } from '../types/cityResult'
 
-export function makeObjectLOcal(
+export function makeObjectLocal(
   route: RouteLocationNormalizedLoaded
 ): ObjectLocal {
   return {
