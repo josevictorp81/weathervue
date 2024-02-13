@@ -46,11 +46,11 @@ export default defineComponent({
 
       <BaseModal @closeModal="toggleModal" :modalActive="state.modalActive">
         <div class="text-black">
-          <h1 class="text-2xl">Sobre:</h1>
+          <h1 class="text-xl">Sobre:</h1>
           <p class="mb-1">
             Weather permite que você monitore o clima atual e futuro das cidades de sua escolha.
           </p>
-          <h2 class="text-2xl">Como funciona:</h2>
+          <h2 class="text-xl">Como funciona:</h2>
           <ol class="list-decimal list-inside mb-2">
             <li>
               Procure por sua cidade informando o nome na barra de pesquisa.
@@ -59,14 +59,13 @@ export default defineComponent({
               Selecione uma cidade de seus resultados, isso trará seu clima atual, o clima de hora em hora pelas próximas 24 horas e semanalmente.
             </li>
             <li>
-              Acompanhe a cidade clicando no no botão <span class="font-semibold text-blue-500">Salvar Cidade</span> na parte inferior do card onde mostra a temperatura e o nome da cidade. Essa ação salvará a cidade alvo, permitindo você ver mais tarde
-              na sua página inicial.
+              Acompanhe a cidade clicando no no botão salvar na parte inferior do card onde mostra a temperatura. Essa ação salvará a cidade alvo, permitindo você ver mais tarde na sua página inicial.
             </li>
           </ol>
 
-          <h2 class="text-2xl">Remover cidade:</h2>
+          <h2 class="text-xl">Remover cidade:</h2>
           <p>
-            Se você não deseja mais acompanhar uma cidade, basta selecionar a cidade na página inicial. Na parte inferior da página, haverá um botão <span class="font-semibold text-red-500">Remover Cidade</span> para excluir a cidade.
+            Se você não deseja mais acompanhar uma cidade, basta selecionar a cidade na página inicial. Na parte inferior da página, click em remover para excluir a cidade.
           </p>
         </div>
       </BaseModal>

@@ -32,7 +32,7 @@ export default defineComponent({
         <Transition name="modal-inner">
           <div v-if="modalActive" class="p-4 bg-white self-start mt-28 max-w-screen-md rounded-lg">
             <slot></slot>
-            <button @click="modalClose" class="text-white mt-8 bg-blue-500 py-2 px-6 rounded-lg hover:bg-weather-secondary">
+            <button @click="modalClose" class="text-white mt-4 bg-blue-500 py-2 px-6 rounded-lg hover:bg-blue-600">
               <i class="fa-solid fa-x text-md"></i>
             </button>
           </div>
