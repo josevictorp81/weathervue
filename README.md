@@ -14,7 +14,7 @@ Este é uma aplicação que mostra o clima atual e futuro de uma cidade.
 <a href="https://vuejs.org/" target="_blank">Vue.js</a> <br>
 <a href="https://router.vuejs.org/" target="_blank">Vue Router</a> <br>
 <a href="https://www.npmjs.com/package/vue3-toastify" target="_blank">vue3-toastify
-</a>
+</a> <br>
 <a href="https://axios-http.com/" target="_blank">Axios</a> <br>
 <a href="https://tailwindcss.com/" target="_blank">tailwindcss</a> <br>
 <a href="https://openweathermap.org/api" target="_blank">OpenWeather</a> <br>
