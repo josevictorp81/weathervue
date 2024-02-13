@@ -59,15 +59,14 @@ export default defineComponent({
               Selecione uma cidade de seus resultados, isso trará seu clima atual, o clima de hora em hora pelas próximas 24 horas e semanalmente.
             </li>
             <li>
-              Acompanhe a cidade clicando no ícone "+" na barra de navegação à direia. Essa ação salvará a cidade alvo, permitindo você ver mais tarde na sua home.
+              Acompanhe a cidade clicando no no botão <span class="font-semibold text-blue-500">Salvar Cidade</span> na parte inferior do card onde mostra a temperatura e o nome da cidade. Essa ação salvará a cidade alvo, permitindo você ver mais tarde
+              na sua página inicial.
             </li>
           </ol>
 
           <h2 class="text-2xl">Remover cidade:</h2>
           <p>
-            Se você não deseja mais acompanhar uma cidade, basta selecionar
-            a cidade na página inicial. Na parte inferior da
-            página, haverá uma opção para excluir a cidade.
+            Se você não deseja mais acompanhar uma cidade, basta selecionar a cidade na página inicial. Na parte inferior da página, haverá um botão <span class="font-semibold text-red-500">Remover Cidade</span> para excluir a cidade.
           </p>
         </div>
       </BaseModal>
