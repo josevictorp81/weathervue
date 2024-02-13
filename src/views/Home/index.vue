@@ -62,8 +62,7 @@ export default defineComponent({
       router.push({
         name: 'city', params: { state: stateName.replace(' ', ''), city: cityName }, query: {
           lat: data.geometry.coordinates[1],
-          lon: data.geometry.coordinates[0],
-          preview: 'true'
+          lon: data.geometry.coordinates[0]
         }
       })
     }
@@ -83,7 +82,7 @@ export default defineComponent({
       <div class="py-4 mb-4 flex justify-center relative">
         <input @input="search" v-model="state.localName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-2/3 bg-transparent text-black border-b border-b-zinc-800 focus:outline-none">
 
-        <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute text-white w-2/3 shadow-md py-2 px-1 top-[66px] rounded bg-blue-400">
+        <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute text-white w-2/3 shadow-md py-2 px-1 top-[66px] rounded bg-blue-500">
           <p v-if="state.hasError">
             Algo deu errado, tente novamente.</p>
           <p v-if="!state.hasError && state.noLocalReturned">

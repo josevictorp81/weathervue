@@ -51,7 +51,7 @@ export default defineComponent({
     <CityCard :city="city" @click="showCityView(city)" />
   </div>
 
-  <p v-if="!state.cities.length">
+  <p v-if="!state.cities.length" class="text-zinc-800">
     Sem cidades salvas. Começe a observar um local buscando no campo acima.
   </p>
 </template>
