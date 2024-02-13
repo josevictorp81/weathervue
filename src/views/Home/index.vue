@@ -98,7 +98,7 @@ export default defineComponent({
 
       <div class="flex flex-col gap-8 md:flex-row md:flex-wrap md:justify-center lg:justify-around">
         <Suspense>
-          <CityList />
+          <CityList :hasResults="!!state.searchLocalResults.length" />
           <template #fallback>
             <Loading />
           </template>

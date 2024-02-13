@@ -13,6 +13,12 @@ interface SetupReturn {
 
 export default defineComponent({
   components: { CityCard },
+  props: {
+    hasResults: {
+      type: Boolean,
+      default: false
+    }
+  },
   async setup(): Promise<SetupReturn> {
     const state = reactive<City>({
       cities: []
@@ -51,7 +57,7 @@ export default defineComponent({
     <CityCard :city="city" @click="showCityView(city)" />
   </div>
 
-  <p v-if="!state.cities.length" class="text-zinc-800">
+  <p v-if="!state.cities.length" class="text-zinc-800 text-center" :class="{ 'hidden': hasResults }">
     Sem cidades salvas. Começe a observar um local buscando no campo acima.
   </p>
 </template>
