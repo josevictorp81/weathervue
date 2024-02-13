@@ -46,12 +46,12 @@ export default defineComponent({
 
       <BaseModal @closeModal="toggleModal" :modalActive="state.modalActive">
         <div class="text-black">
-          <h1 class="text-2xl mb-1">Sobre:</h1>
-          <p class="mb-4">
+          <h1 class="text-2xl">Sobre:</h1>
+          <p class="mb-1">
             Weather permite que você monitore o clima atual e futuro das cidades de sua escolha.
           </p>
           <h2 class="text-2xl">Como funciona:</h2>
-          <ol class="list-decimal list-inside mb-4">
+          <ol class="list-decimal list-inside mb-2">
             <li>
               Procure por sua cidade informando o nome na barra de pesquisa.
             </li>
