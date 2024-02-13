@@ -121,11 +121,11 @@ export default defineComponent({
           <img :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Ícone">
         </div>
 
-        <button v-if="!state.cityInLocalStorage" @click="saveCity" class="w-2/5 sm:w-56 h-10 rounded-lg text-blue-900 bg-white mb-1 text-lg flex justify-center items-center gap-2">
+        <button v-if="!state.cityInLocalStorage" @click="saveCity" class="w-3/5 sm:w-56 h-10 rounded-lg text-blue-900 bg-white mb-1 text-lg flex justify-center items-center gap-2">
           <i class="fa-solid fa-plus"></i>
           <p class="font-medium">Salvar Cidade</p>
         </button>
-        <button v-else @click="removeCity" class="w-2/5 sm:w-56 h-10 rounded-lg bg-red-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
+        <button v-else @click="removeCity" class="w-3/5 sm:w-56 h-10 rounded-lg bg-red-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
           <i class="fa-solid fa-trash"></i>
           <p class="">Remover Cidade</p>
         </button>
