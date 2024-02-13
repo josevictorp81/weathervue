@@ -2,19 +2,23 @@
 import { defineComponent, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import currentDateAndTime from '../../helpers/currentDateAndTime'
+import { makeObjectLocal } from '../../helpers/makeObjectLocal'
+import useCity from '../../hooks/city'
 import services from '../../services'
-import { City } from '../../types/cityResult'
+import { ObjectLocal } from '../../types/cityResult'
 import { ForecastResult } from '../../types/forecastResults'
 
 type State = {
   data: ForecastResult | any
   cityName: string
+  cityInLocalStorage: boolean
 }
 
 interface SetupReturn {
   state: State
   getIcon: (icon: string) => string
   removeCity: () => void
+  saveCity: () => void
 }
 
 export default defineComponent({
@@ -22,19 +26,18 @@ export default defineComponent({
     const state = reactive<State>({
       data: {},
       cityName: '',
+      cityInLocalStorage: false
     })
-
-    // const savedCities = reactive<City>({
-    //   cities: []
-    // })
 
     const route = useRoute()
     const router = useRouter()
+    const city = useCity()
 
     try {
       const lat = Number(route.query.lat)
       const lon = Number(route.query.lon)
       state.cityName = String(route.params.city)
+      state.cityInLocalStorage = city.citySaved(state.cityName)
       const { data, errors } = await services.weather.getForecastData(lat, lon)
 
       if (errors) {
@@ -45,45 +48,40 @@ export default defineComponent({
 
       state.data = currentDateAndTime(data)
     } catch (error) {
-      console.log('erro')
+      console.log(error)
     }
 
     function getIcon(icon: string): string {
       return `https://openweathermap.org/img/wn/${icon}@2x.png`
     }
 
-    // function addCityToLocalStorage() {
-    //   if (localStorage.getItem('savedCities')) {
-    //     const saved: City = JSON.parse(localStorage.getItem('savedCities') as string)
-    //     savedCities.cities = saved.cities
-    //   }
-
-    //   const objectLocal: ObjectLocal = makeObjectLOcal(route)
-    //   const exists = verifyCityExists(savedCities.cities, objectLocal.city)
-    //   if (!exists) {
-    //     savedCities.cities.push(objectLocal)
-    //     state.showSaveCity = !state.showSaveCity
-    //   }
-
-    //   localStorage.setItem('savedCities', JSON.stringify(savedCities))
-
-    //   let query = Object.assign({}, route.query)
-    //   delete query.preview
-    //   router.replace({ query })
-    // }
+    function saveCity() {
+      const objectLocal: ObjectLocal = makeObjectLocal(route)
+      if (!state.cityInLocalStorage) {
+        try {
+          setTimeout(() => {
+            city.saveCity(objectLocal)
+            state.cityInLocalStorage = true
+          }, 500)
+        } catch (error) {
+          console.log('Ocorreu algum erro!')
+        }
+      }
+    }
 
     function removeCity() {
-      const query = String(route.query.id)
-      const cities: City = JSON.parse(localStorage.getItem('savedCities') as string)
-      cities.cities = cities.cities.filter((city) => city.id !== query)
-      localStorage.setItem('savedCities', JSON.stringify(cities))
-      router.push({ name: 'home' })
+      city.removeCity(String(route.query.id))
+      setTimeout(() => {
+        router.push({ name: 'home' })
+      }, 400)
+
     }
 
     return {
       state,
       getIcon,
       removeCity,
+      saveCity
     }
   }
 })
@@ -112,11 +110,11 @@ export default defineComponent({
           <img :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Ícone">
         </div>
 
-        <button class="w-2/5 sm:w-56 h-10 rounded-lg bg-blue-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
+        <button v-if="!state.cityInLocalStorage" @click="saveCity" class="w-2/5 sm:w-56 h-10 rounded-lg bg-blue-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
           <i class="fa-solid fa-plus"></i>
           <p class="">Salva Cidade</p>
         </button>
-        <button class="w-2/5 sm:w-56 h-10 rounded-lg bg-red-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
+        <button v-else @click="removeCity" class="w-2/5 sm:w-56 h-10 rounded-lg bg-red-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
           <i class="fa-solid fa-trash"></i>
           <p class="">Remover Cidade</p>
         </button>
