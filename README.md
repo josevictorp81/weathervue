@@ -16,6 +16,6 @@ Este é uma aplicação que mostra o clima atual e futuro de uma cidade.
 <a href="https://www.npmjs.com/package/vue3-toastify" target="_blank">vue3-toastify
 </a>
 <a href="https://axios-http.com/" target="_blank">Axios</a> <br>
-<a href="https://tailwindcss.com/" target="_blank">tailwindcss</a>
-<a href="https://openweathermap.org/api" target="_blank">OpenWeather</a>
-<a href="https://www.mapbox.com/" target="_blank">mapbox</a>
+<a href="https://tailwindcss.com/" target="_blank">tailwindcss</a> <br>
+<a href="https://openweathermap.org/api" target="_blank">OpenWeather</a> <br>
+<a href="https://www.mapbox.com/" target="_blank">mapbox</a> <br>
