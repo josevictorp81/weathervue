@@ -1,6 +1,7 @@
 <script lang='ts'>
 import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import useCity from '../../hooks/city'
 import services from '../../services'
 import { City, ObjectLocal } from '../../types/cityResult'
 import CityCard from '../CityCard/index.vue'
@@ -17,13 +18,12 @@ export default defineComponent({
       cities: []
     })
 
+    const city = useCity()
     const router = useRouter()
 
     async function getCities() {
-      if (localStorage.getItem('savedCities')) {
-        const saved: City = JSON.parse(localStorage.getItem('savedCities') as string)
-        state.cities = saved.cities
-      }
+      state.cities = city.getCities().cities
+
       await new Promise((res) => setTimeout(res, 1000))
 
       state.cities.forEach(async (city, index) => {

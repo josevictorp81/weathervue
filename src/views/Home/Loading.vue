@@ -1,14 +1,30 @@
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { Ref, defineComponent, onMounted, ref } from 'vue'
 import Loader from '../../components/Loader/index.vue'
+import useCity from '../../hooks/city'
+
+type SetupReturn = {
+  state: Ref<number>
+}
 
 export default defineComponent({
-  components: { Loader }
+  components: { Loader },
+  setup(): SetupReturn {
+    const state = ref<number>(0)
+
+    onMounted(() => {
+      state.value = useCity().getCities().cities.length
+    })
+
+    return {
+      state
+    }
+  }
 })
 </script>
 
 <template>
-  <div class="flex w-full md:w-[290px] lg:w-[360px]  py-6 px-4 bg-blue-600 hover:mt-1 rounded-md shadow-md cursor-pointer">
+  <div v-for="(_, index) in state" :key="index" class="flex w-full md:w-[290px] lg:w-[360px]  py-6 px-4 bg-blue-600 hover:mt-1 rounded-md shadow-md cursor-pointer">
     <div class="flex flex-col flex-1 gap-2">
       <Loader class="max-w-[50%]" />
       <Loader class="max-w-[50%]" />

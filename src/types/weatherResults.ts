@@ -1,9 +1,5 @@
 import { Weather } from './forecastResults'
 
-type Coord = {
-  lon: number
-  lat: number
-}
 type Main = {
   temp: number
   feels_like: number
@@ -13,9 +9,7 @@ type Main = {
 }
 
 export type WeatherResult = {
-  coord: Coord
   weather: Weather[]
   main: Main
   id: number
-  name: string
 }
