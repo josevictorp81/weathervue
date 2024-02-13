@@ -8,6 +8,7 @@ Este é uma aplicação que mostra o clima atual e futuro de uma cidade.
 - Selecione uma cidade de seus resultados, isso trará seu clima atual, o clima de hora em hora pelas próximas 24 horas, e semanalmente.
 - Acompanhe a cidade clicando no no botão `Salvar Cidade` na parte inferior do card onde mostra a temperatura e o nome da cidade. Essa ação salvará a cidade alvo, permitindo você ver mais tarde na sua página _home_.
 - Se você não deseja mais acompanhar uma cidade, basta selecionar a cidade na página inicial. Na parte inferior da página, haverá um botão `Remover Cidade` para excluir a cidade.
+- Para volta para a página inicial, você precisa clicar no logo/weather na barra de navegação.
 
 ## Tecnologias e Ferramentas
 
