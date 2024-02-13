@@ -30,7 +30,7 @@ export default defineComponent({
     <Transition name="modal-outer">
       <div v-show="modalActive" class="fixed w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8">
         <Transition name="modal-inner">
-          <div v-if="modalActive" class="p-4 bg-white self-start mt-32 max-w-screen-md rounded">
+          <div v-if="modalActive" class="p-4 bg-white self-start mt-28 max-w-screen-md rounded">
             <slot></slot>
             <button @click="modalClose" class="text-white mt-8 bg-weather-primary py-2 px-6 rounded hover:bg-weather-secondary">
               <i class="fa-solid fa-x text-md"></i>
