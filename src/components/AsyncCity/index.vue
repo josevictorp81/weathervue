@@ -99,11 +99,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="w-full flex justify-center mt-2">
-    <div class="w-11/12 p-2 flex flex-col gap-4 items-center lg:flex-row lg:gap-6">
-      <div class="w-11/12 bg-blue-600 text-white rounded-lg p-3 flex items-center flex-col shadow-lg sm:w-10/12 md:w-4/5 lg:w-5/12">
-        <p class="text-3xl mb-2">{{ state.cityName }}</p>
-        <p class="mb-2">
+  <div class="w-full flex justify-center mt-1">
+    <div class="w-11/12 p-2 flex flex-col gap-3 items-center lg:flex-row lg:gap-6">
+      <div class="w-11/12 bg-blue-primary text-white rounded-lg p-3 flex items-center flex-col shadow-lg sm:w-10/12 md:w-4/5 lg:w-5/12">
+        <p class="text-2xl mb-2">{{ state.cityName }}</p>
+        <p class="mb-1">
           {{
             new Date(state.data.currentTime).toLocaleDateString('pt-br', { weekday: 'short', day: '2-digit', month: 'long' })
 
@@ -113,30 +113,30 @@ export default defineComponent({
 
           }}
         </p>
-        <p class="text-7xl mb-2">{{ Math.round(state.data.current.temp) }}&deg;</p>
+        <p class="text-7xl mb-1">{{ Math.round(state.data.current.temp) }}&deg;</p>
 
-        <div class="w-9/12 flex flex-col items-center pt-2 mb-2">
+        <div class="w-9/12 flex flex-col items-center mb-2">
           <p class="text-lg text-center lg:w-4/5">Sensação Térmica - {{ Math.round(state.data.current.feels_like) }}&deg;</p>
           <p class="text-lg capitalize">{{ state.data.current.weather[0].description }}</p>
           <img :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Ícone">
         </div>
 
-        <button v-if="!state.cityInLocalStorage" @click="saveCity" class="w-3/5 sm:w-56 h-10 rounded-lg text-blue-900 bg-white mb-1 text-lg flex justify-center items-center gap-2">
+        <button v-if="!state.cityInLocalStorage" @click="saveCity" class="w-56 h-10 rounded-lg text-black bg-white flex justify-center items-center gap-2">
           <i class="fa-solid fa-plus"></i>
-          <p class="font-medium">Salvar Cidade</p>
+          <p>Salvar Cidade</p>
         </button>
-        <button v-else @click="removeCity" class="w-3/5 sm:w-56 h-10 rounded-lg bg-red-500 mb-1 text-white text-lg flex justify-center items-center gap-2">
+        <button v-else @click="removeCity" class="w-56 h-10 rounded-lg bg-red-500 text-white flex justify-center items-center gap-2">
           <i class="fa-solid fa-trash"></i>
           <p class="">Remover Cidade</p>
         </button>
       </div>
 
-      <div class="w-11/12 flex flex-col items-center gap-4 p-3 bg-blue-500 text-white rounded-lg shadow-lg sm:w-10/12 md:w-4/5 lg:w-7/12">
+      <div class="w-11/12 flex flex-col items-center gap-4 p-3 bg-blue-primary text-white rounded-lg shadow-lg sm:w-10/12 md:w-4/5 lg:w-7/12">
         <div class="w-full flex flex-col gap-2">
           <h2 class="text-lg text-center">Previsão de hora em hora</h2>
 
-          <div class="flex gap-4 py-2 px-2 overflow-x-auto">
-            <div v-for="hour in state.data.hourly" :id="hour.dt" class="flex flex-col gap-4 bg-blue-400 rounded-md items-center px-5 py-3">
+          <div class="flex gap-4 p-2 overflow-x-auto">
+            <div v-for="hour in state.data.hourly" :id="hour.dt" class="flex flex-col gap-2 bg-blue-500 rounded-lg items-center px-4 py-2">
               <p class="">{{ new Date(hour.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' }) }}</p>
               <img :src="getIcon(hour.weather[0].icon)" alt="Ícone" :title="hour.weather[0].description">
               <p>{{ Math.round(hour.temp) }}&deg;</p>
@@ -147,9 +147,9 @@ export default defineComponent({
         <div class="w-full flex flex-col gap-2">
           <h2 class="text-lg text-center">Previsão para os próximos 7 dias</h2>
 
-          <div class="flex gap-3 py-2 flex-wrap justify-center xl:justify-self-auto">
-            <div v-for="(day, index) in state.data.daily" :key="day.dt" class="flex flex-col items-center rounded-lg bg-blue-400 py-3 px-2 shadow-lg" :class="{ 'border border-red-500': index === 0 }">
-              <p class="capitalize">{{ new Date(day.dt * 1000).toLocaleDateString('pt-br', { weekday: 'short', day: '2-digit', month: '2-digit' }) }}</p>
+          <div class="flex gap-4 p-2 pc overflow-x-scroll xl:justify-self-auto">
+            <div v-for="(day, index) in state.data.daily" :key="day.dt" class="flex flex-col items-center rounded-lg bg-blue-500 py-2 px-4 shadow-lg" :class="{ 'border border-red-500': index === 0 }">
+              <p class="capitalize px-3">{{ new Date(day.dt * 1000).toLocaleDateString('pt-br', { weekday: 'short', day: '2-digit', month: '2-digit' }) }}</p>
               <img :src="getIcon(day.weather[0].icon)" alt="Ícone" :title="day.weather[0].description">
               <div class="flex flex-col items-center">
                 <p>Max: {{ Math.round(day.temp.max) }}&deg;</p>

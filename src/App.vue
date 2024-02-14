@@ -5,7 +5,7 @@ import Navigation from './components/Navigation/index.vue'
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen font-roboto bg-zinc-100">
+  <div class="flex flex-col min-h-screen font-roboto bg-gray-primary">
     <Navigation />
     <RouterView v-slot="{ Component }">
       <Transition name="page" mode="out-in">
