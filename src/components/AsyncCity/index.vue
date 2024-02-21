@@ -100,25 +100,35 @@ export default defineComponent({
 
 <template>
   <div class="w-full flex justify-center mt-1">
-    <div class="w-11/12 p-2 flex flex-col gap-3 items-center lg:flex-row lg:gap-6">
-      <div class="w-11/12 bg-blue-primary text-white rounded-lg p-3 flex items-center flex-col shadow-lg sm:w-10/12 md:w-4/5 lg:w-5/12">
-        <p class="text-2xl mb-2">{{ state.cityName }}</p>
-        <p class="mb-1">
-          {{
-            new Date(state.data.currentTime).toLocaleDateString('pt-br', { weekday: 'short', day: '2-digit', month: 'long' })
+    <div class="w-11/12 p-2 flex flex-col gap-3 items-center lg:gap-4">
+      <div class="w-11/12 bg-blue-primary text-white rounded-lg p-2 flex items-center flex-col gap-2 shadow-lg sm:w-10/12 md:w-4/5 lg:w-7/12">
+        <div class="w-full p-1 mb-1 flex md:justify-center md:gap-2">
+          <div class="flex flex-col items-center h-full w-1/2 md:w-2/5">
+            <p class="text-2xl mb-1 text-center">{{ state.cityName }}</p>
+            <p class="mb-1 text-center">
+              {{
+                new Date(state.data.currentTime).toLocaleDateString('pt-br', { weekday: 'long' })
 
-          }}
-          {{
-            new Date(state.data.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' })
+              }}
+            </p>
+            <p class="mb-1 text-center">
+              {{
+                new Date(state.data.currentTime).toLocaleDateString('pt-br', { day: '2-digit', month: 'long' })
 
-          }}
-        </p>
-        <p class="text-7xl mb-1">{{ Math.round(state.data.current.temp) }}&deg;</p>
+              }} -
+              {{
+                new Date(state.data.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' })
 
-        <div class="w-9/12 flex flex-col items-center mb-2">
-          <p class="text-lg text-center lg:w-4/5">Sensação Térmica - {{ Math.round(state.data.current.feels_like) }}&deg;</p>
-          <p class="text-lg capitalize">{{ state.data.current.weather[0].description }}</p>
-          <img :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Ícone">
+              }}
+            </p>
+            <p class="text-7xl mb-1">{{ Math.round(state.data.current.temp) }}&deg;</p>
+          </div>
+
+          <div class="w-1/2 h-full flex flex-col items-center mb-2 md:w-2/5">
+            <p class="text-lg text-center lg:w-4/5">Sensação Térmica - {{ Math.round(state.data.current.feels_like) }}&deg;</p>
+            <p class="text-lg capitalize">{{ state.data.current.weather[0].description }}</p>
+            <img class="mt-auto" :src="getIcon(state.data.current.weather[0].icon)" :title="state.data.current.weather[0].description" alt="Ícone">
+          </div>
         </div>
 
         <button v-if="!state.cityInLocalStorage" @click="saveCity" class="w-56 h-10 rounded-lg text-black bg-white flex justify-center items-center gap-2">

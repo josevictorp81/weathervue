@@ -96,7 +96,7 @@ export default defineComponent({
         </ul>
       </div>
 
-      <div class="flex flex-col gap-8 md:flex-row md:flex-wrap md:justify-center lg:justify-around">
+      <div class="flex flex-col gap-4 md:flex-row md:flex-wrap md:justify-center">
         <Suspense>
           <CityList :hasResults="!!state.searchLocalResults.length" />
           <template #fallback>
