@@ -32,7 +32,7 @@ export default defineComponent({
 
 <template>
   <header class="flex justify-center shadow-lg rounded-b-xl">
-    <nav class="w-11/12 sm:w-4/5 md:w-9/12 flex items-center gap-4 text-white p-3">
+    <nav class="w-11/12 sm:w-4/5 md:w-9/12 lg:w-7/12 flex items-center gap-4 text-white p-3">
       <RouterLink :to="{ name: 'home' }">
         <div class="flex items-center gap-2 flex-col md:flex-row md:gap-4">
           <img src="../../assets/img/logo.png" class="w-[50px] h-[50px] md:w-[70px] md:h-[70px]" alt="Logo" title="Weather">

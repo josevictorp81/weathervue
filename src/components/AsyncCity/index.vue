@@ -137,7 +137,7 @@ export default defineComponent({
         </button>
         <button v-else @click="removeCity" class="w-56 h-10 rounded-lg bg-red-500 text-white flex justify-center items-center gap-2">
           <i class="fa-solid fa-trash"></i>
-          <p class="">Remover Cidade</p>
+          <p>Remover Cidade</p>
         </button>
       </div>
 
@@ -147,7 +147,7 @@ export default defineComponent({
 
           <div class="flex gap-4 p-2 overflow-x-auto">
             <div v-for="hour in state.data.hourly" :id="hour.dt" class="flex flex-col gap-2 bg-blue-500 rounded-lg items-center px-4 py-2">
-              <p class="">{{ new Date(hour.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' }) }}</p>
+              <p>{{ new Date(hour.currentTime).toLocaleTimeString('pt-br', { timeStyle: 'short' }) }}</p>
               <img :src="getIcon(hour.weather[0].icon)" alt="Ícone" :title="hour.weather[0].description">
               <p>{{ Math.round(hour.temp) }}&deg;</p>
             </div>

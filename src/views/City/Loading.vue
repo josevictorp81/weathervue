@@ -13,11 +13,11 @@ export default defineComponent({
       <div class="w-11/12 bg-blue-primary text-white rounded-lg p-2 flex items-center flex-col gap-2 shadow-lg sm:w-10/12 md:w-4/5 lg:w-7/12">
         <div class="w-full p-1 mb-1 flex md:justify-center md:gap-2">
           <div class="flex flex-col items-center h-full w-1/2 md:w-2/5">
-            <Loader class="w-full h-[170px]" />
+            <Loader class="w-full h-[170px] rounded-lg" />
           </div>
 
           <div class="w-1/2 h-full flex flex-col items-center mb-2 md:w-2/5">
-            <Loader class="w-full h-[170px]" />
+            <Loader class="w-full h-[170px] rounded-lg" />
           </div>
         </div>
 
