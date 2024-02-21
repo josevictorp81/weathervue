@@ -8,16 +8,25 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="w-full flex justify-center mt-2">
-    <div class="w-11/12 flex flex-col gap-4 items-center lg:flex-row lg:gap-6">
-      <div class="w-9/12 lg:w-5/12 mt-14 h-[450px] bg-blue-600 rounded-lg flex flex-col justify-center items-center">
-        <Loader class="w-4/5 h-[90px] mb-4" />
-        <Loader class="w-4/5 h-[200px] mb-4" />
-        <Loader class="w-4/5 h-[80px]" />
+  <div class="w-full flex justify-center mt-1">
+    <div class="w-11/12 p-2 flex flex-col gap-3 items-center lg:gap-4">
+      <div class="w-11/12 bg-blue-primary text-white rounded-lg p-2 flex items-center flex-col gap-2 shadow-lg sm:w-10/12 md:w-4/5 lg:w-7/12">
+        <div class="w-full p-1 mb-1 flex md:justify-center md:gap-2">
+          <div class="flex flex-col items-center h-full w-1/2 md:w-2/5">
+            <Loader class="w-full h-[170px]" />
+          </div>
+
+          <div class="w-1/2 h-full flex flex-col items-center mb-2 md:w-2/5">
+            <Loader class="w-full h-[170px]" />
+          </div>
+        </div>
+
+        <Loader class="w-56 h-10 rounded-lg" />
       </div>
-      <div class="w-9/12 lg:w-7/12 h-[700px] bg-blue-600 flex flex-col items-center rounded-lg mt-4">
-        <Loader class="w-11/12 h-[180px] mt-14" />
-        <Loader class="w-11/12 h-[350px] mt-20" />
+
+      <div class="w-11/12 flex flex-col items-center gap-4 p-3 bg-blue-primary rounded-lg shadow-lg sm:w-10/12 md:w-4/5 lg:w-7/12">
+        <Loader class="w-full h-[180px] mb-8 rounded-lg" />
+        <Loader class="w-full h-[210px] rounded-lg" />
       </div>
     </div>
   </div>
