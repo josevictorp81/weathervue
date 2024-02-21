@@ -82,14 +82,14 @@ export default defineComponent({
       <div class="py-4 mb-4 flex justify-center relative">
         <input @input="search" v-model="state.localName" type="text" placeholder="Pesquise por uma cidade" class="py-2 px-1 w-2/3 bg-transparent text-black border-b border-b-zinc-800 focus:outline-none">
 
-        <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute text-white w-2/3 shadow-md py-2 px-1 top-[66px] rounded bg-blue-500">
+        <ul v-if="state.searchLocalResults.length || state.noLocalReturned" class="absolute w-2/3 shadow-md py-2 px-2 top-[66px] rounded bg-gray-primary text-black">
           <p v-if="state.hasError">
             Algo deu errado, tente novamente.</p>
           <p v-if="!state.hasError && state.noLocalReturned">
             Sem resultados na sua persquisa, tente um nome diferente.
           </p>
           <template v-else>
-            <li @click="viewCity(local)" v-for="local in state.searchLocalResults" :key="local.id" class="py-2 cursor-pointer">
+            <li @click="viewCity(local)" v-for="local in state.searchLocalResults" :key="local.id" class="py-2 cursor-pointer rounded-md hover:bg-blue-primary">
               {{ local.place_name }}
             </li>
           </template>
